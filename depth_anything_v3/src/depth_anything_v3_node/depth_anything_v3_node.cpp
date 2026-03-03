@@ -83,7 +83,8 @@ DepthAnythingV3Node::DepthAnythingV3Node(const rclcpp::NodeOptions & node_option
 
   // Synchronized subscribers for image (via image_transport) and camera_info
   // image_transport supports raw and compressed transports transparently
-  sub_image_.subscribe(this, "~/input/image", "raw", rclcpp::SensorDataQoS().get_rmw_qos_profile());
+  const auto transport = declare_parameter<std::string>("image_transport", "raw");
+  sub_image_.subscribe(this, "~/input/image", transport, rclcpp::SensorDataQoS().get_rmw_qos_profile());
   sub_camera_info_ = std::make_shared<message_filters::Subscriber<sensor_msgs::msg::CameraInfo>>(
     this, "~/input/camera_info", rclcpp::SensorDataQoS().get_rmw_qos_profile());
   
