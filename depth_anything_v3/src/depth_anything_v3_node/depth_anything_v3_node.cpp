@@ -111,8 +111,8 @@ DepthAnythingV3Node::DepthAnythingV3Node(const rclcpp::NodeOptions & node_option
   RCLCPP_INFO(get_logger(), "  - Camera info topic: ~/input/camera_info");
 
   // Publishers
-  pub_depth_image_ = create_publisher<sensor_msgs::msg::Image>("~/output/depth_image", 1);
-  pub_point_cloud_ = create_publisher<sensor_msgs::msg::PointCloud2>("~/output/point_cloud", 1);
+  pub_depth_image_ = create_publisher<sensor_msgs::msg::Image>("~/output/depth_image", 10);
+  pub_point_cloud_ = create_publisher<sensor_msgs::msg::PointCloud2>("~/output/point_cloud", 10);
   
   if (node_param_.enable_debug) {
     pub_depth_image_debug_ = create_publisher<sensor_msgs::msg::Image>(
@@ -120,8 +120,8 @@ DepthAnythingV3Node::DepthAnythingV3Node(const rclcpp::NodeOptions & node_option
   }
 
   if (node_param_.republish_sync_source) {
-    pub_raw_image_ = create_publisher<sensor_msgs::msg::Image>("~/output/image_raw", 1);
-    pub_camera_info_ = create_publisher<sensor_msgs::msg::CameraInfo>("~/output/camera_info", 1);
+    pub_raw_image_ = create_publisher<sensor_msgs::msg::Image>("~/output/image_raw", 10);
+    pub_camera_info_ = create_publisher<sensor_msgs::msg::CameraInfo>("~/output/camera_info", 10);
   }
 
   // Init TensorRT model
